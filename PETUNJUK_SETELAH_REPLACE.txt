@@ -1,0 +1,35 @@
+PETUNJUK MENJALANKAN PROJECT K5 MART
+
+1. Buat database MySQL dengan nama: k5_mart
+2. Buka CMD/Terminal di dalam folder project.
+3. Jalankan perintah berikut secara berurutan:
+
+   composer install
+   copy .env.example .env
+   php artisan key:generate
+   php artisan migrate:fresh --seed
+   php artisan storage:link
+   php artisan optimize:clear
+   php artisan serve
+
+PERINGATAN:
+Perintah migrate:fresh akan menghapus seluruh tabel dan data lama pada database k5_mart,
+lalu membuat struktur terbaru tanpa modul lama.
+
+AKUN LOGIN HASIL DB:SEED
+
+Admin
+Email    : admin@k5mart.test
+Password : password123
+
+Kasir
+Email    : kasir@k5mart.test
+Password : password123
+
+HAK AKSES KASIR
+
+- Menu User tidak ditampilkan.
+- Produk hanya dapat dilihat dan dibuka detailnya.
+- Jenis Produk hanya dapat dilihat.
+- Transaksi penjualan dapat dibuat seperti biasa.
+- Uang dibayar dan kembalian hanya tampil untuk pembayaran Cash.
