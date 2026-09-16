@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title', 'K5 Mart')</title>
+    <title><?php echo $__env->yieldContent('title', 'K5 Mart'); ?></title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -31,7 +31,7 @@
         }
     </style>
 
-    @stack('styles')
+    <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 
 <body class="bg-slate-50 text-slate-800 min-h-screen">
@@ -47,7 +47,7 @@
                 <div class="flex items-center gap-8">
 
                     <!-- Logo -->
-                    <a href="{{ route('tentang.index') }}" aria-label="Tentang K5 Mart"
+                    <a href="<?php echo e(route('tentang.index')); ?>" aria-label="Tentang K5 Mart"
                        class="flex items-center gap-2.5">
 
                         <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-md shadow-indigo-200">
@@ -68,31 +68,31 @@
                     <div class="hidden md:flex items-center gap-1">
 
                         <!-- Dashboard -->
-                        <a href="{{ url('/dashboard') }}"
+                        <a href="<?php echo e(url('/dashboard')); ?>"
                            class="px-3.5 py-2 rounded-lg text-sm font-medium transition
-                           {{ request()->is('dashboard') ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-100' }}">
+                           <?php echo e(request()->is('dashboard') ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-100'); ?>">
 
                             Dashboard
 
                         </a>
 
 
-                        @if(strtolower(optional(Auth::user()->role)->nama ?? '') === 'admin')
+                        <?php if(strtolower(optional(Auth::user()->role)->nama ?? '') === 'admin'): ?>
                         <!-- User (khusus Admin) -->
-                        <a href="{{ url('/user') }}"
+                        <a href="<?php echo e(url('/user')); ?>"
                            class="px-3.5 py-2 rounded-lg text-sm font-medium transition
-                           {{ request()->is('user*') ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-100' }}">
+                           <?php echo e(request()->is('user*') ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-100'); ?>">
 
                             User
 
                         </a>
-                        @endif
+                        <?php endif; ?>
 
 
                         <!-- Produk -->
-                        <a href="{{ url('/produk') }}"
+                        <a href="<?php echo e(url('/produk')); ?>"
                            class="px-3.5 py-2 rounded-lg text-sm font-medium transition
-                           {{ request()->is('produk*') ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-100' }}">
+                           <?php echo e(request()->is('produk*') ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-100'); ?>">
 
                             Produk
 
@@ -100,9 +100,9 @@
 
 
                         <!-- Jenis Produk -->
-                        <a href="{{ url('/jenis-produk') }}"
+                        <a href="<?php echo e(url('/jenis-produk')); ?>"
                            class="px-3.5 py-2 rounded-lg text-sm font-medium transition
-                           {{ request()->is('jenis-produk*') ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-100' }}">
+                           <?php echo e(request()->is('jenis-produk*') ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-100'); ?>">
 
                             Jenis Produk
 
@@ -110,22 +110,22 @@
 
 
                         <!-- Penjualan -->
-                        <a href="{{ url('/penjualan') }}"
+                        <a href="<?php echo e(url('/penjualan')); ?>"
                            class="px-3.5 py-2 rounded-lg text-sm font-medium transition
-                           {{ request()->is('penjualan*') ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-100' }}">
+                           <?php echo e(request()->is('penjualan*') ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-100'); ?>">
 
                             Penjualan
 
                         </a>
 
-                        <a href="{{ route('tentang.index') }}"
-                           class="px-3.5 py-2 rounded-lg text-sm font-medium transition {{ request()->routeIs('tentang.*') ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-100' }}">
+                        <a href="<?php echo e(route('tentang.index')); ?>"
+                           class="px-3.5 py-2 rounded-lg text-sm font-medium transition <?php echo e(request()->routeIs('tentang.*') ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:bg-slate-100'); ?>">
                             Tentang
                         </a>
 
-                        <a href="{{ route('profile') }}"
-                           class="{{ request()->routeIs('profile', 'profile.edit')
-                           ? 'bg-indigo-50 text-indigo-600': 'text-slate-600 hover:text-indigo-600' }}">
+                        <a href="<?php echo e(route('profile')); ?>"
+                           class="<?php echo e(request()->routeIs('profile', 'profile.edit')
+                           ? 'bg-indigo-50 text-indigo-600': 'text-slate-600 hover:text-indigo-600'); ?>">
 
                             Profile
 
@@ -145,16 +145,17 @@
                            class="w-4 h-4"></i>
 
                         <span class="font-medium">
-                            {{ Auth::user()->name ?? 'Admin' }}
+                            <?php echo e(Auth::user()->name ?? 'Admin'); ?>
+
                         </span>
 
                     </div>
 
 
                     <form method="POST"
-                          action="{{ route('logout') }}">
+                          action="<?php echo e(route('logout')); ?>">
 
-                        @csrf
+                        <?php echo csrf_field(); ?>
 
                         <button type="submit"
                                 class="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-lg transition shadow-sm shadow-red-200">
@@ -181,36 +182,38 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         <!-- SUCCESS -->
-        @if(session('success'))
+        <?php if(session('success')): ?>
 
             <div class="mb-6 flex items-center gap-3 px-4 py-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm">
 
                 <i data-lucide="check-circle-2"
                    class="w-5 h-5 text-emerald-500"></i>
 
-                {{ session('success') }}
+                <?php echo e(session('success')); ?>
+
 
             </div>
 
-        @endif
+        <?php endif; ?>
 
 
         <!-- ERROR -->
-        @if(session('error'))
+        <?php if(session('error')): ?>
 
             <div class="mb-6 flex items-center gap-3 px-4 py-3 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl text-sm">
 
                 <i data-lucide="alert-circle"
                    class="w-5 h-5 text-rose-500"></i>
 
-                {{ session('error') }}
+                <?php echo e(session('error')); ?>
+
 
             </div>
 
-        @endif
+        <?php endif; ?>
 
 
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
 
     </main>
 
@@ -218,7 +221,7 @@
     <!-- FOOTER -->
     <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-xs text-slate-400">
 
-        © {{ date('Y') }} K5 Mart
+        © <?php echo e(date('Y')); ?> K5 Mart
 
     </footer>
 
@@ -227,8 +230,9 @@
         lucide.createIcons();
     </script>
 
-    @stack('scripts')
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 
 </body>
 
 </html>
+<?php /**PATH C:\laragon\www\k5_mart\resources\views/layouts/app.blade.php ENDPATH**/ ?>

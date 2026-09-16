@@ -10,6 +10,7 @@ use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ItemPenjualanController;
 use App\Http\Controllers\JenisProdukController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TentangController;
 
 
 /*
@@ -36,6 +37,13 @@ Route::middleware('guest')->group(function () {
 */
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/tentang', [TentangController::class, 'index'])->name('tentang.index');
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/tentang/edit', [TentangController::class, 'edit'])->name('tentang.edit');
+        Route::put('/tentang', [TentangController::class, 'update'])->name('tentang.update');
+    });
+
 
 
     /*
